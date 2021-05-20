@@ -8,9 +8,9 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 ### Matrix Decompositions
 
-`LU(A)`: LU decomposition of square matrix
+`LU(A,L,U)`: LU decomposition of square matrix
 
-`QR(A)`: QR decomposition of (nonsquare) matrix
+`QR(A,Q,R)`: QR decomposition of (nonsquare) matrix
 
 ### Linear Systems
 
