@@ -2,21 +2,22 @@
 
 "mini linear algebra"
 
-A light weight and standalone C implementation of common linear algebraic operations for dense matrices and vectors.
+A light weight and standalone Fortran implementation of common linear algebraic operations for dense matrices and vectors.
 
 ---
 
-### Primitives
+### Matrix Decompositions
 
-`vva`: vector vector addition
+`LU(A)`: LU decomposition of square matrix
 
-`mma`: matrix matrix addition
+`QR(A)`: QR decomposition of (nonsquare) matrix
 
-`mvp`: matrix vector product
+### Linear Systems
 
-`mmp`: matrix matrix product
+`linsolve(A,b)`: solve (square) linear system `Ax=b`
 
-`mme`: matrix matrix elementwise
+`lssolve(A,r)`: solve least squares problem `Ax \approx b`
+
 
 ---
 
