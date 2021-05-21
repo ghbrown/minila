@@ -1,0 +1,7 @@
+
+#ignore compiler generated files
+*.mod
+*.o
+
+#ignore file with extension of executables
+*.x
