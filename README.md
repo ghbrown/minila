@@ -6,6 +6,12 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 ---
 
+### Primitives
+
+Simple linear algebra operations not included in Fortran built-ins.
+
+`r1p(u1,u2,u1Tu2)`: rank one product of two vectors, produces matrix equal to transpose(u1)u2
+
 ### Matrix Decompositions
 
 `LU(A,L,U)`: LU decomposition of square matrix
@@ -18,7 +24,6 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 `lssolve(A,r)`: solve least squares problem `Ax \approx b`
 
-
 ---
 
 *Notes*
@@ -28,6 +33,6 @@ even vector vector addition of arbitrarily sized arrays was
 needlessly complicated. This is almost wholly because C does not
 allow the determination of array size from pointers to arrays.
 
-I'm also using this library as a way to strengthen my programming
+I'm mainly using this library as a way to strengthen my programming
 in a standard scientific computing language and to better understand
 implementations of popular linear algebra methods.
