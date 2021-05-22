@@ -6,6 +6,8 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 ---
 
+**implemented** (otherwise it has not yet been implemented)
+
 (f) - function
 
 (s) - subroutine
@@ -14,8 +16,10 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 Simple linear algebra operations not included in Fortran built-ins.
 
-`dispmat(A)`(s): displays matrix A
-`r1p(u1,u2)`(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
+**`dispmat(A)`**(s): displays matrix A
+
+**`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
+
 `strang(T,b)`(f): solve triangular system Tx=b given triangular matrix T (what a coincidentally great name for the function)
 
 ### Matrix Decompositions
@@ -26,9 +30,9 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 ### Linear Systems
 
-`linsolve(A,b)`: solve (square) linear system `Ax=b`
+`linsolve(A,b)`(f): solve (square) linear system `Ax=b` (combination of LU decomposition and triangular system solver)
 
-`lssolve(A,r)`: solve least squares problem `Ax \approx b`
+`lssolve(A,r)`(f): solve least squares problem `Ax \approx b`
 
 ---
 
