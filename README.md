@@ -6,17 +6,23 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 ---
 
+(f) - function
+
+(s) - subroutine
+
 ### Primitives
 
 Simple linear algebra operations not included in Fortran built-ins.
 
-`r1p(u1,u2,u1Tu2)`: rank one product of two vectors, produces matrix equal to transpose(u1)u2
+`dispmat(A)`(s): displays matrix A
+`r1p(u1,u2)`(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
+`strang(T,b)`(f): solve triangular system Tx=b given triangular matrix T (what a coincidentally great name for the function)
 
 ### Matrix Decompositions
 
-`LU(A,L,U)`: LU decomposition of square matrix
+`LU(A,L,U)`(s): LU decomposition of square matrix
 
-`QR(A,Q,R)`: QR decomposition of (nonsquare) matrix
+`QR(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
 
 ### Linear Systems
 
