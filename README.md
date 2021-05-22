@@ -20,7 +20,7 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
 
-`strang(T,b)`(f): solve triangular system Tx=b given triangular matrix T (what a coincidentally great name for the function)
+`strang(T,b)`(f): solve triangular system Tx=b given triangular matrix T (what a serindiptously great name for the function)
 
 ### Matrix Decompositions
 
