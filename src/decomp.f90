@@ -1,7 +1,7 @@
 module decomp
   !Contains subroutines for matrix decompositions: LU 
   !and eventually: QR, eigenvalue
-  use primitives
+  use prim
   implicit none
 
 contains

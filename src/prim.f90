@@ -1,5 +1,5 @@
 
-module primitives
+module prim
 !primitive linear algebraic operations not included in standard Fortran
 implicit none
 
@@ -43,6 +43,6 @@ contains
     u1u2T=matmul(u1m,u2m) !compute rank 1 product
   end function rop
 
-end module primitives
+end module prim
 
 
