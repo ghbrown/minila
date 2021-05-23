@@ -3,8 +3,7 @@
 *.mod
 *.o
 *.x
-src/*.mod
-src/*.o
-tests/*.mod
-tests/*.o
+src/obj/*
+src/mod/*
+src/exe/*
 

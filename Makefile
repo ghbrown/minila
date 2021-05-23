@@ -19,6 +19,7 @@ DECOMP_TEST=tests/test_decomp.f90
 all:
 	@make prim
 	@make decomp
+	@$(FC) $(ALL_PROGS) 
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -o $(EXE_DIR)/minila.x
 
 clean:
