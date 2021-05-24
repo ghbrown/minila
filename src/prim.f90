@@ -43,6 +43,16 @@ contains
     u1u2T=matmul(u1m,u2m) !compute rank 1 product
   end function rop
 
+  !function strang(T,b) result(x)
+    !solve triangular system
+    !---Inputs---
+    !T: (upper OR lower) triangular matrix
+    !b: right hand side vector
+    !---Outputs---
+    !x: solution to triangular system
+    !function should determine if it is upper or lower triangular and transpose lower triangular matrices (or use transposed indices) to always solve upper triangular system.
+  
+
 end module prim
 
 

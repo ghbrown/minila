@@ -9,7 +9,7 @@ ALL_PROGS=src/minila.f90
 #Module (.mod file location)
 MOD_DIR=src/mod
 OBJ_DIR=src/obj
-EXE_DIR=src/exe
+EXE_DIR=exe
 
 #Test programs
 PRIM_TEST=tests/test_prim.f90
@@ -23,7 +23,8 @@ all:
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -o $(EXE_DIR)/minila.x
 
 clean:
-	@rm $(MOD_DIR)/* $(OBJ_DIR)/*
+	@rm -f ./*.mod ./*.o ./*.x
+	@rm -f $(MOD_DIR)/*.mod $(OBJ_DIR)/*.o $(EXE_DIR)/*.x
 
 
 #Compile a subset of the modules
@@ -41,9 +42,9 @@ test:
 
 test-prim:
 	@$(MAKE) -s prim
-	@$(FC) -I $(MOD_DIR) $(PRIM_TEST) -o test_prim.x
-	@./test_prim.x
-	@rm testprim.x
+	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(PRIM_TEST) -o $(OBJ_DIR)/test_prim.o
+	@$(FC) -I $(MOD_DIR) -o $(EXE_DIR)/test_prim.x $(OBJ_DIR)/* 
+	@./$(EXE_DIR)/test_prim.x
 
 
 

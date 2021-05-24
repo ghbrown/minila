@@ -8,9 +8,13 @@ program test_prim
   real, dimension(3,3) :: rop_mat_ans=transpose(reshape((/4.,5.,6.,8.,10.,12.,12.,15.,18./),(/3,3/)))
   real :: rop_res_mat(3,3) !rank one product residual matrix
 
+  print *
+  print *, "PRIMITIVE TESTS:"
   rop_res_mat=abs(rop(rop_vec1,rop_vec2)-rop_mat_ans)
   if ((sum(rop_res_mat)/size(rop_res_mat)) > 1e-10) then
-     print *, "Rank one product (rop) function failed."
+     print *, "  Rank one product (rop)   FAIL"
+  else
+     print *, "  Rank one product (rop)   PASS"
   end if
 
 end program test_prim

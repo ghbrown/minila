@@ -1,9 +1,7 @@
 
-#ignore compiler generated files
+#Ignore compiler generated files in main directory
+#(though there shouldn't be any)
 *.mod
 *.o
 *.x
-src/obj/*
-src/mod/*
-src/exe/*
 

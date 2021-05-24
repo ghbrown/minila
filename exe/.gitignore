@@ -1,0 +1,6 @@
+
+#Ignore all executable files
+*
+
+#But not this file
+!.gitignore

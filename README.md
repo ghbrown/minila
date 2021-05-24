@@ -24,9 +24,9 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 ### Matrix Decompositions
 
-`LU(A,L,U)`(s): LU decomposition of square matrix
+`lupp(A,L,U)`(s): LU decomposition of square matrix
 
-`QR(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
+`qr(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
 
 ### Linear Systems
 
@@ -38,11 +38,12 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 *Notes*
 
-This was originally supposed to be a C library, but implementing
-even vector vector addition of arbitrarily sized arrays was
-needlessly complicated. This is almost wholly because C does not
-allow the determination of array size from pointers to arrays.
-
 I'm mainly using this library as a way to strengthen my programming
 in a standard scientific computing language and to better understand
 implementations of popular linear algebra methods.
+
+This was originally supposed to be a C library, but implementing
+even vector vector addition of arbitrarily sized arrays was
+needlessly complicated. This is almost wholly because C does not
+allow the determination of array size from pointers to arrays (I think I have figured our the proper way to get around this now, so maybe I'll write a C version in the future.)
+

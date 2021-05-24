@@ -26,6 +26,7 @@ contains
     !this will take more memory and about twice as long, but it's infinitely more readable
 
     !there may also be a way to structure this such that it overwrites S into (L_strict + I + U, L_strict: strictly lower triangular, I: identity, U: upper triangular with nontrivial diagonal elements) which would save memory
+    !this could be done by overwriting the non-sub-matrix part of S (one shell per iteration
     do cur_iter=1,n-1
        L(cur_iter,cur_iter)=1 !set diagonal element of L
        L(cur_iter+1:,cur_iter)=S(cur_iter+1:,1)/S(cur_iter,cur_iter)
