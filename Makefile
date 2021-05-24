@@ -17,8 +17,8 @@ DECOMP_TEST=tests/test_decomp.f90
 
 
 all:
-	@make prim
-	@make decomp
+	@$(MAKE) -s prim
+	@$(MAKE) -s decomp
 	@$(FC) $(ALL_PROGS) 
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -o $(EXE_DIR)/minila.x
 
@@ -31,16 +31,16 @@ prim:
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(PRIM_PROGS) -o $(OBJ_DIR)/prim.o
 
 decomp:
-	@make prim
+	@$(MAKE) -s prim
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(DECOMP_PROGS) -o $(OBJ_DIR)/decomp.o
 
 
 #Tests
 test:
-	@make test-prim
+	@$(MAKE) -s test-prim
 
 test-prim:
-	@make prim
+	@$(MAKE) -s prim
 	@$(FC) -I $(MOD_DIR) $(PRIM_TEST) -o test_prim.x
 	@./test_prim.x
 	@rm testprim.x
