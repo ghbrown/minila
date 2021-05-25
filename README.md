@@ -12,6 +12,12 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 (s) - subroutine
 
+---
+
+## Main Functions 
+
+Functions which will likely be directly useful to a user.
+
 ### Primitives
 
 Simple linear algebra operations not included in Fortran built-ins.
@@ -20,11 +26,11 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
 
-`strang(T,b)`(f): solve triangular system Tx=b given triangular matrix T (what a serindiptously great name for the function)
+**`strang(T,b)`**(f): solve triangular system Tx=b given (upper *or* lower) triangular matrix T (what a serindiptously great name for the function)
 
 ### Matrix Decompositions
 
-`lupp(A,L,U)`(s): LU decomposition of square matrix
+`lupp(A,L,U)`(s): LU decomposition of square matrix with partial pivoting
 
 `qr(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
 
@@ -33,6 +39,14 @@ Simple linear algebra operations not included in Fortran built-ins.
 `linsolve(A,b)`(f): solve (square) linear system `Ax=b` (combination of LU decomposition and triangular system solver)
 
 `lssolve(A,r)`(f): solve least squares problem `Ax \approx b`
+
+---
+
+### Other Functions
+
+Far more situational than the functions above, but used internally by other functions.
+
+**`is_triangular(A,type)`**(f): outputs a logical value, and assigns `type` to character corresponding to type of triangularity (`n`-not triangular, `u`-upper triangular, `l`-lower triangular, `d`-diagonal)
 
 ---
 

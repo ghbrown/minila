@@ -22,7 +22,54 @@ contains
        print *, A(i,:)
     end do
   end subroutine dispmat
-  
+
+  function is_triangular(A,type) result(tof)
+    !display matrix
+    !---Inputs---
+    !A: a matrix (to be tested for triangularity)
+    !---Outputs---
+    !type: character defining what type of triangular it is
+    !      "q", not square
+    !      "n", not triangular
+    !      "u", upper triangular
+    !      "l", lower triangular
+    !      "d", diagonal (upper and lower triangular)
+    real, intent(in) :: A(:,:)
+    character, intent(out) :: type
+    logical :: tof
+    real :: sum_lower, sum_upper
+    integer :: i, n
+
+    if (size(A,1) /= size(A,2)) then
+       tof=.false. !T is not square
+       type="q"
+    else
+       n=size(A,2) !define system size
+    end if
+
+    sum_lower=0
+    sum_upper=0
+    do i=1,n
+       sum_lower=sum_lower+sum(abs(A(i+1:,i)))
+       sum_upper=sum_upper+sum(abs(A(1:i-1,i)))
+    end do
+
+    if ((sum_upper > 0) .and. (sum_lower > 0)) then
+       tof=.false. !T is not triangular
+       type="n"
+    else if (sum_upper+sum_lower == 0.0) then
+       type="d" !T is upper and lower triangular (diagonal)
+       tof=.true. 
+    else if (sum_upper > 0) then
+       tof=.true. !sum of upper triangle is zero
+       type="l" !T must be lower triangular
+    else if (sum_lower > 0) then
+       tof=.true. !sum of lower triangle is zero
+       type="u" !T must be upper triangular
+    end if
+
+  end function is_triangular
+
 
   function rop(u1,u2) result(u1u2T)
     !rank one product
@@ -61,22 +108,30 @@ contains
     integer :: n !system size/dimension
     integer :: i_forward !increasing index
     integer :: i !decreasing index computed from i_forward
-    character :: type !will be set to "upper" or "lower"
-    if (size(T,1) /= size(T,2)) then
-       print *, "ERROR: Attempted to solve non-square triangular system."
+    character :: type !will be used as output of is_triangular
+
+    if (.not. is_triangular(T,type)) then
+       print *, "ERROR: Attempted to solve non-triangular system."
        return
     else
        n=size(T,2)
     end if
 
-    !Back substitution
-    do i=n,1,-1
-       x(i)=(1 / T(i,i)) * ( b(i) - dot_product(T(i,i+1:),x(i+1:)) )
-    end do
+    if ( (type == "l") .or. (type=="d") ) then
+       !T is lower triangular
+       !use back substitution
+       do i=n,1,-1
+          x(i)=(1 / T(i,i)) * ( b(i) - dot_product(T(i,i+1:),x(i+1:)) )
+       end do
+    else
+       !T is triangular, but not lower triangular (must be upper)
+       !use forward substitution
+       do i=1,n
+          x(i)=(1 / T(i,i)) * ( b(i) - dot_product(T(i,1:i-1),x(1:i-1)) )
+       end do
+    end if
 
   end function strang
-
-  
   
 
 end module prim

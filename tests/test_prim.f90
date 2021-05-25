@@ -36,21 +36,24 @@ subroutine test_strang(abs_tol)
   implicit none
   real, intent(in) :: abs_tol
   real, dimension(3,3) :: T_upper=transpose(reshape((/1.,2.,3.,0.,4.,5.,0.,0.,6./),(/3,3/)))
-  real, dimension(3) :: b=(/14.,23.,18./)
+  real, dimension(3) :: b_upper=(/14.,23.,18./)
+  real, dimension(3,3) :: T_lower=transpose(reshape((/1.,0.,0.,2.,3.,0.,4.,5.,6./),(/3,3/)))
+  real, dimension(3) :: b_lower=(/1.,8.,32./)
   real, dimension(3) :: x_ans=(/1.,2.,3./)
-  real, dimension(3) :: x
+  real, dimension(3) :: x_upper, x_lower
+  logical :: passed_upper, passed_lower
 
   !test back substitution
-  x=strang(T_upper,b)
-  if (norm2(x-x_ans) > abs_tol) then
-     print *, "  FAILED,    strang (triangular solve)" 
-  else
-     print *, "  PASSED,    strang (triangular solve)"
-  end if
+  x_upper=strang(T_upper,b_upper)
+  x_lower=strang(T_lower,b_lower)
+  passed_upper=(norm2(x_upper-x_ans) < abs_tol)
+  passed_lower=(norm2(x_lower-x_ans) < abs_tol)
 
-  !test forward substitution
-  !x=strang(T_lower,b)
-  
+  if (passed_upper .and. passed_lower) then
+     print *, "  PASSED,    strang (triangular solve)"
+  else
+     print *, "  FAILED,    strang (triangular solve)" 
+  end if
 
 end subroutine test_strang
 
