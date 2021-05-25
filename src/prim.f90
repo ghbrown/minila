@@ -1,7 +1,9 @@
 
 module prim
-!primitive linear algebraic operations not included in standard Fortran
-implicit none
+  !primitive linear algebraic operations not included in standard Fortran
+  !dispmat(A): displays matrix A
+  !strang(T,b): solves triangular system Tx=b
+  implicit none
 
 contains
 
@@ -43,14 +45,38 @@ contains
     u1u2T=matmul(u1m,u2m) !compute rank 1 product
   end function rop
 
-  !function strang(T,b) result(x)
+
+  !function should determine if it is upper or lower triangular and transpose lower triangular matrices (or use transposed indices) to always solve upper triangular system.
+  function strang(T,b) result(x)
     !solve triangular system
     !---Inputs---
     !T: (upper OR lower) triangular matrix
     !b: right hand side vector
     !---Outputs---
     !x: solution to triangular system
-    !function should determine if it is upper or lower triangular and transpose lower triangular matrices (or use transposed indices) to always solve upper triangular system.
+    implicit none
+    real, intent(in) :: T(:,:)
+    real, intent(in) :: b(size(T,2))
+    real :: x(size(T,2))
+    integer :: n !system size/dimension
+    integer :: i_forward !increasing index
+    integer :: i !decreasing index computed from i_forward
+    character :: type !will be set to "upper" or "lower"
+    if (size(T,1) /= size(T,2)) then
+       print *, "ERROR: Attempted to solve non-square triangular system."
+       return
+    else
+       n=size(T,2)
+    end if
+
+    !Back substitution
+    do i=n,1,-1
+       x(i)=(1 / T(i,i)) * ( b(i) - dot_product(T(i,i+1:),x(i+1:)) )
+    end do
+
+  end function strang
+
+  
   
 
 end module prim
