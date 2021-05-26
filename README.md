@@ -2,7 +2,7 @@
 
 "mini linear algebra"
 
-A light weight and standalone Fortran implementation of common linear algebraic operations for dense matrices and vectors.
+A lightweight and standalone Fortran implementation of common linear algebraic operations for dense matrices and vectors.
 
 ---
 
@@ -16,11 +16,9 @@ A light weight and standalone Fortran implementation of common linear algebraic 
 
 ## Main Functions 
 
-Functions which will likely be directly useful to a user.
-
 ### Primitives
 
-Simple linear algebra operations not included in Fortran built-ins.
+Simple linear algebra operations not included in Fortran built-ins. Building blocks for other modules.
 
 **`dispmat(A)`**(s): displays matrix `A`
 
@@ -30,14 +28,14 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to `u1 u2^T`
 
-
 **`diag_sub(D,b)`**(f): solve lower diagonal system `Dx=b` for `x=b/get_diag(D)`
 
 **`bck_sub(T,b)`**(f): solve lower triangular system `Tx=b` for `x` using back substitution
 
 **`fwd_sub(T,b)`**(f): solve upper triangular system `Tx=b` for `x` using forward substitution
 
-**`strang(T,b)`**(f): solve triangular system `Tx=b` after detecting the triangularity type of T. Essentially wrapper around the `*sub` functions with O(n^2) checks and extra safeguards; if performance is critical use the `*sub` functions directly. **What a serindiptously great name for the function.**
+**`strang(T,b)`**(f): solve triangular system `Tx=b` after detecting the triangularity type of T. Essentially wrapper around the `*sub` functions with O(n^2) checks and extra safeguards; if performance is critical use the `*_sub` functions directly. **What a serindiptously great name for the function.**
+
 
 ### Matrix Decompositions
 
@@ -45,9 +43,10 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 `qr(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
 
+
 ### Linear Systems
 
-`linsolve(A,b)`(f): solve (square) linear system `Ax=b` (combination of LU decomposition and triangular system solver)
+`linsolve(A,b)`(f): solve (square) linear system `Ax=b`
 
 `lssolve(A,r)`(f): solve least squares problem `Ax \approx b`
 
@@ -55,7 +54,7 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 ### Helper Functions
 
-Functoins used internally by other functions. Not the meat and potatoes of a linear algebra library, but possibly useful.
+Used internally by other functions, but not the meat and potatoes of a linear algebra library.
 
 **`is_square(A,n)`**(f): returns logical value on whether matrix A is square, if so sets `n` equal to dim(A)
 
