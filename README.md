@@ -22,11 +22,22 @@ Functions which will likely be directly useful to a user.
 
 Simple linear algebra operations not included in Fortran built-ins.
 
-**`dispmat(A)`**(s): displays matrix A
+**`dispmat(A)`**(s): displays matrix `A`
 
-**`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
+**`get_diag(A)`**(f): returns diagonal elements of matrix A as vector
 
-**`strang(T,b)`**(f): solve triangular system Tx=b after detecting the triangularity type of T (what a serindiptously great name for the function)
+**`set_diag(diag_vec)`**(f): returns square matrix of zeros with diagonal elements specified by `diag_vec`
+
+**`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to `u1 u2^T`
+
+
+**`diag_sub(D,b)`**(f): solve lower diagonal system `Dx=b` for `x=b/get_diag(D)`
+
+**`bck_sub(T,b)`**(f): solve lower triangular system `Tx=b` for `x` using back substitution
+
+**`fwd_sub(T,b)`**(f): solve upper triangular system `Tx=b` for `x` using forward substitution
+
+**`strang(T,b)`**(f): solve triangular system `Tx=b` after detecting the triangularity type of T. Essentially wrapper around the `*sub` functions with O(n^2) checks and extra safeguards; if performance is critical use the `*sub` functions directly. **What a serindiptously great name for the function.**
 
 ### Matrix Decompositions
 
@@ -42,11 +53,13 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 ---
 
-### Other Functions
+### Helper Functions
 
-More situational than the functions above, but used internally by other functions.
+Functoins used internally by other functions. Not the meat and potatoes of a linear algebra library, but possibly useful.
 
-**`is_triangular(A,type)`**(f): outputs a logical value, and assigns `type` to character corresponding to type of triangularity (`"n"`-not triangular, `"u"`-upper triangular, `"l"`-lower triangular, `"d"`-diagonal)
+**`is_square(A,n)`**(f): returns logical value on whether matrix A is square, if so sets `n` equal to dim(A)
+
+**`is_triangular(A,type)`**(f): outputs a logical value, and assigns `type` to character corresponding to type of triangularity (`"q"`-not square, `"n"`-not triangular, `"u"`-upper triangular, `"l"`-lower triangular, `"d"`-diagonal)
 
 ---
 
