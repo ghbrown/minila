@@ -93,9 +93,8 @@ contains
   end function rop
 
 
-  !function should determine if it is upper or lower triangular and transpose lower triangular matrices (or use transposed indices) to always solve upper triangular system.
   function strang(T,b) result(x)
-    !solve triangular system
+    !solve triangular system, detects type of triangularity
     !---Inputs---
     !T: (upper OR lower) triangular matrix
     !b: right hand side vector
@@ -107,7 +106,7 @@ contains
     real :: x(size(T,2))
     integer :: n !system size/dimension
     integer :: i_forward !increasing index
-    integer :: i !decreasing index computed from i_forward
+    integer :: i
     character :: type !will be used as output of is_triangular
 
     if (.not. is_triangular(T,type)) then
@@ -117,7 +116,13 @@ contains
        n=size(T,2)
     end if
 
-    if ( (type == "l") .or. (type=="d") ) then
+    if (type=="d") then
+       !T is diagonal
+       !Use O(n) method to solve.
+       do i=1,n
+          x(i)=b(i)/T(i,i) !
+       end do
+    else if (type == "l") then
        !T is lower triangular
        !use back substitution
        do i=n,1,-1

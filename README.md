@@ -26,7 +26,7 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to (u1)transpose(u2)
 
-**`strang(T,b)`**(f): solve triangular system Tx=b given (upper *or* lower) triangular matrix T (what a serindiptously great name for the function)
+**`strang(T,b)`**(f): solve triangular system Tx=b after detecting the triangularity type of T (what a serindiptously great name for the function)
 
 ### Matrix Decompositions
 
@@ -44,9 +44,9 @@ Simple linear algebra operations not included in Fortran built-ins.
 
 ### Other Functions
 
-Far more situational than the functions above, but used internally by other functions.
+More situational than the functions above, but used internally by other functions.
 
-**`is_triangular(A,type)`**(f): outputs a logical value, and assigns `type` to character corresponding to type of triangularity (`n`-not triangular, `u`-upper triangular, `l`-lower triangular, `d`-diagonal)
+**`is_triangular(A,type)`**(f): outputs a logical value, and assigns `type` to character corresponding to type of triangularity (`"n"`-not triangular, `"u"`-upper triangular, `"l"`-lower triangular, `"d"`-diagonal)
 
 ---
 
