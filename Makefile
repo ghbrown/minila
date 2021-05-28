@@ -39,12 +39,20 @@ decomp:
 #Tests
 test:
 	@$(MAKE) -s test-prim
+	@$(MAKE) -s test-decomp
 
 test-prim:
 	@$(MAKE) -s prim
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(PRIM_TEST) -o $(OBJ_DIR)/test_prim.o
 	@$(FC) -I $(MOD_DIR) -o $(EXE_DIR)/test_prim.x $(OBJ_DIR)/* 
 	@./$(EXE_DIR)/test_prim.x
+	@rm $(EXE_DIR)/test_prim.x
+
+test-decomp:
+	@$(MAKE) -s decomp
+	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(DECOMP_TEST) -o $(OBJ_DIR)/test_decomp.o
+	@$(FC) -I $(MOD_DIR) -o $(EXE_DIR)/test_decomp.x $(OBJ_DIR)/*
+	@./$(EXE_DIR)/test_decomp.x
 
 
 
