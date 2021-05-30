@@ -39,6 +39,8 @@ contains
       !IMPLEMENT PARTIAL PIVOTING HERE
       !search over S(cur_iter+1:,cur_iter+1:) for the largest column norm
       !swap that column with leading subcolumn S(cur_iter+1:,cur_iter+1)
+      !to do swap use buff_vec(cur_iter+1:) where buff_vec is length n
+      !may be a way to do it without buff_vec by direct swap
       !record these swaps in a vector or something
       S(cur_iter+1:,cur_iter+1:)=S(cur_iter+1:,cur_iter+1:)-rop(L(cur_iter+1:,cur_iter),U(cur_iter,cur_iter+1:)) !update Schur complement submatrix in S
     end do

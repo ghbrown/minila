@@ -11,7 +11,7 @@ MOD_DIR=src/mod
 OBJ_DIR=src/obj
 EXE_DIR=exe
 
-#Test programs
+#Test programs and folders
 PRIM_TEST=tests/test_prim.f90
 DECOMP_TEST=tests/test_decomp.f90
 
@@ -46,13 +46,14 @@ test-prim:
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(PRIM_TEST) -o $(OBJ_DIR)/test_prim.o
 	@$(FC) -I $(MOD_DIR) -o $(EXE_DIR)/test_prim.x $(OBJ_DIR)/* 
 	@./$(EXE_DIR)/test_prim.x
-	@rm $(EXE_DIR)/test_prim.x
+	@$(MAKE) -s clean
 
 test-decomp:
 	@$(MAKE) -s decomp
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(DECOMP_TEST) -o $(OBJ_DIR)/test_decomp.o
 	@$(FC) -I $(MOD_DIR) -o $(EXE_DIR)/test_decomp.x $(OBJ_DIR)/*
 	@./$(EXE_DIR)/test_decomp.x
+	@$(MAKE) -s clean
 
 
 
