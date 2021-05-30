@@ -19,8 +19,6 @@ contains
     integer, intent(out) :: P(size(A,1)) !vector used to keep track of column swaps
     real :: S(size(A,1),size(A,1))
     integer :: i, n, cur_iter, max_row_rel
-    integer :: P_buff !scalar integer buffer used to swap elements of P
-    real :: row_buff_vec(size(A,1)) !intermediate vector used to make column swaps
 
     !THIS ERROR IS ITSELF ERRONEOUS, LU DOES EXIST FOR NONSQUARE MATRICES
     !THIS MAY BE A PAIN TO IMPLEMENT (INDICES BELOW, ETC.)
@@ -40,17 +38,12 @@ contains
     !this could be done by overwriting the non-sub-matrix part of S (one row-column shell per iteration)
 
     do cur_iter=1,n
-       !partial pivoting is working, but
+       !partial pivoting not working, so commented out
 
       max_row_rel=maxloc(abs(S(cur_iter:,cur_iter)),1)-1 !get index of row with maximum leading entry (relative to cur_iter row)
-      P_buff=P(cur_iter) !swap in permutation vector
-      P(cur_iter)=P(cur_iter+max_row_rel)
-      P(cur_iter+max_row_rel)=P_buff
-
-      row_buff_vec(cur_iter:)=S(cur_iter,cur_iter:) !swap rows of submatrix
-      !UNCOMMENT THESE ROWS WHEN P HAS BEEN PROPERLY IMPLEMENTED IN TESTS AND LINEAR SOLVE
-      !S(cur_iter,cur_iter:)=S(cur_iter+max_row_rel,cur_iter:)
-      !S(cur_iter+max_row_rel,cur_iter:)=row_buff_vec(cur_iter:)
+      P((/cur_iter,cur_iter+max_row_rel/))=P((/cur_iter+max_row_rel,cur_iter/)) !perform swap of P elements in place
+      !UNCOMMENT BELOW LINE WHEN P HAS BEEN PROPERLY IMPLEMENTED IN TESTS AND LINEAR SOLVE
+      !S((/cur_iter+max_row_rel,cur_iter/),cur_iter:)=S((/cur_iter,cur_iter+max_row_rel/),cur_iter:) !perform swap of submatrix rows in place
 
       L(cur_iter,cur_iter)=1 !set diagonal element of L
       L(cur_iter+1:,cur_iter)=S(cur_iter+1:,cur_iter)/S(cur_iter,cur_iter)

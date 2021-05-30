@@ -16,12 +16,13 @@ subroutine test_lupp(abs_tol)
 
   implicit none
   real, intent(in) :: abs_tol
-  real, dimension(5,5) :: A, L, U
-  integer, dimension(5) :: P
+  real, dimension(3,3) :: A, L, U
+  integer, dimension(3) :: P
   real :: res_mean
   call random_number(A)
   call lupp(A,L,U,P)
-  !need to make matrix out of P and premultiply with L
+
+  !L=L(:,P)
   res_mean=sum(abs(A-matmul(L,U)))/size(A)
 
   if (res_mean > abs_tol) then
