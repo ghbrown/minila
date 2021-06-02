@@ -9,8 +9,10 @@ module linsys
   !if (min(abs(get_diag(U))) < sing_tol) then !check diagonal of u to see if A is invertible
   !print *, "ERROR: Attempted to solve singular linear system"
   !else
+  !pT(P)=(/(i,i=1,size(p,1))/) !permutation vector corresponding to P^T
   !b=b(P) !pivot swap b using P vector
   !y=fwdsub(L,b)
   !x=bcksub(U,y)
+
 
 end module linsys

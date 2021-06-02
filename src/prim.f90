@@ -10,7 +10,7 @@ contains
   subroutine disp_mat(A)
     !display matrix
     !---Inputs---
-    !A: a matrix
+    !A: matrix
     !---Outputs---
     !NONE: just prints out matrix
     implicit none
@@ -22,7 +22,7 @@ contains
     end do
   end subroutine disp_mat
 
-  
+
   function is_square(A,n) result(tof)
     !Determines if a matrix is square, and if so what it's
     !dimension is.
@@ -131,7 +131,7 @@ contains
         A(i,i)=diag_vec(i)
     end do
   end function set_diag
-  
+
 
   function rop(u1,u2) result(u1u2T)
     !rank one product
