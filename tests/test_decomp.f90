@@ -19,9 +19,8 @@ subroutine test_lupp(abs_tol)
   real, intent(in) :: abs_tol
   real, dimension(4,4):: A=transpose(reshape((/2.,0.,2.,0.6,3.,3.,4.,-2.,5.,5.,4.,2.,-1.,-2.,3.4,-1./),(/4,4/)))
   real, dimension(4,4) :: L, U
-  real, dimension(4,4) :: P_mat
   integer :: i
-  integer, dimension(4) :: p, pT !permutation vectors corresponding to matrices P and transpose(P)
+  integer, dimension(4) :: p, pT !permutation vectors corresponding to matrices P and P^T
   real :: res_mean
 
   !the A initilized above is from Cormen's "Introduction to Algorithms"
@@ -32,7 +31,7 @@ subroutine test_lupp(abs_tol)
   call random_number(A)
   call lupp(A,L,U,p)
 
-  pT(P)=(/(i,i=1,size(p,1))/) !permutation vector corresponding to P^T
+  pT(p)=(/(i,i=1,size(p,1))/) !permutation vector corresponding to P^T
 
   res_mean=sum(abs(A-matmul(L(pT,:),U)))/size(A)
 

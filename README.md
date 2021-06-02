@@ -20,7 +20,7 @@ A lightweight and standalone Fortran implementation of common linear algebraic o
 
 Simple linear algebra operations not included in Fortran built-ins. Building blocks for other modules.
 
-**`dispmat(A)`**(s): displays matrix `A`
+**`disp_mat(A)`**(s): displays matrix `A`
 
 **`get_diag(A)`**(f): returns diagonal elements of matrix A as vector
 
@@ -39,7 +39,7 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 ### Matrix Decompositions
 
-`lupp(A,L,U)`(s): LU decomposition of square matrix with partial pivoting
+**`lupp(A,L,U,p)`**(s): LU decomposition of square matrix with partial pivoting, results satisfy `PA=A(p,:)=LU` where `P` is the matrix corresponding to pivot vector `p` 
 
 `qr(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
 
@@ -70,6 +70,6 @@ implementations of popular linear algebra methods.
 
 This was originally supposed to be a C library, but implementing
 even vector vector addition of arbitrarily sized arrays was
-needlessly complicated. This is almost wholly because C does not
-allow the determination of array size from pointers to arrays (I think I have figured our the proper way to get around this now, so maybe I'll write a C version in the future.)
+needlessly complicated (almost wholly because C does not
+allow the determination of array size from pointers to arrays). I think I have figured our the proper way to get around this now, so maybe I'll write a C version in the future.
 

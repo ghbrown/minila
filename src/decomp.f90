@@ -10,19 +10,21 @@ contains
   !fix LUPP decomposition to permit rectangular matrices
   !implement packed storage (must do AFTER the above)
 
-  subroutine lupp(A,L,U,P)
+  subroutine lupp(A,L,U,p)
     !Performs LU decomposition of A with partial pivoting.
     !---Inputs---
     !A: square matrix (this is checked)
     !---Outputs---
     !L: lower triangular matrix
     !U: upper triangular matrix
-    !P: "left" pivot vector
-    !NOTE: the vector P is returned such that P_mat A = A(P,:) = L U,
+    !p: "left" pivot vector
+    !NOTE: the vector p is returned such that P_mat A = A(p,:) = L U,
     !      where P_mat is the matrix constructable from P
-    !      *if P is to be used on the right hand side (to permute L
-    !      L, for example) it must be vector-reversed with rev_vec()
-    !      before using on the right
+    !      ****if p is to be used on the right hand side (to permute L,
+    !      for example) one must compute the vector corresponding to
+    !      transpose(P_mat):
+    !         pT(p)=(/(i,i=1,size(p,1))/)
+    !      which satisfies A = L(pT,:) U ***
     implicit none
     real, intent(in) :: A(:,:)
     real, intent(out) :: L(size(A,1),size(A,1)), U(size(A,1),size(A,1))
