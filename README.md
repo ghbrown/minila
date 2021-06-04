@@ -2,7 +2,7 @@
 
 "mini linear algebra"
 
-A lightweight and standalone Fortran implementation of common linear algebraic operations for dense matrices and vectors.
+A standalone Fortran implementation of common linear algebraic operations for dense matrices and vectors.
 
 ---
 
@@ -41,14 +41,16 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 **`lupp(A,L,U,p)`**(s): LU decomposition of square matrix with partial pivoting, results satisfy `PA=A(p,:)=LU` where `P` is the matrix corresponding to pivot vector `p` 
 
-`qr(A,Q,R)`(s): QR decomposition of (nonsquare) matrix
+`qr(A,Q,R)`(s): QR decomposition of matrix as `A=QR`
+
+`eig(A,V,d)`(s): eigenvalue/spectral decomposition of matrix as `A = V diag(d) V^-1`
 
 
 ### Linear Systems
 
-`linsolve(A,b)`(f): solve (square) linear system `Ax=b`
+`linsol(A,b)`(f): solve (square) linear system `Ax=b`
 
-`lssolve(A,r)`(f): solve least squares problem `Ax \approx b`
+`lssol(A,r)`(f): solve least squares problem `Ax \approx b`
 
 ---
 

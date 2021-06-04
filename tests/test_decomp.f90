@@ -33,7 +33,7 @@ subroutine test_lupp(abs_tol)
 
   pT(p)=(/(i,i=1,size(p,1))/) !permutation vector corresponding to P^T
 
-  res_mean=sum(abs(A-matmul(L(pT,:),U)))/size(A)
+  res_mean=sum(abs(A-matmul(L(pT,:),U)))/size(A) !mean of the absolute value of the matrix residual
 
   if (res_mean > abs_tol) then
      print *, "  FAILED,    lupp (LU, partial pivoting)"
