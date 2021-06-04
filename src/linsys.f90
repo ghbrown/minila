@@ -16,16 +16,18 @@ contains
     !x: solution to linear system
     real, intent(in) :: A(:,:)
     real, intent(in) :: b(size(A,2))
-    real :: x(size(A,2))
-    real, dimension(size(A,2),size(A,2)) :: L, U
-    real, dimension(size(A,2)) :: b_permuted, y
-    integer, dimension(size(A,2)) :: p !row pivot vectors (such that PA=A(p,:)
+    real, allocatable :: x(:)
+    real, allocatable, dimension(:,:) :: L, U
+    real, allocatable :: b_permuted(:), y(:)
+    integer, allocatable :: p(:) !row pivot vectors (such that PA=A(p,:)
     integer :: i, n
 
     if (.not. is_square(A,n)) then
        print *, "ERROR: cannot solve nonsquare linear system"
        return
     end if
+
+    allocate(L(n,n), U(n,n), b_permuted(n), y(n), p(n))
 
     call lupp(A,L,U,p)
 

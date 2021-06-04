@@ -22,10 +22,10 @@ subroutine test_linsol(abs_tol)
   real, allocatable :: b(:)
   real, allocatable :: x(:)
   integer :: n=3
+
   !allocate and set up appropriately sized arrays
-  allocate(A(n,n))
-  allocate(b(n))
-  allocate(x(n))
+  allocate(A(n,n), b(n), x(n))
+
   call random_number(A)
   call random_number(b)
 
@@ -40,6 +40,5 @@ subroutine test_linsol(abs_tol)
   end if
      
 end subroutine test_linsol
-
 
 

@@ -41,6 +41,8 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 **`lupp(A,L,U,p)`**(s): LU decomposition of square matrix with partial pivoting, results satisfy `PA=A(p,:)=LU` where `P` is the matrix corresponding to pivot vector `p` 
 
+`ldl(A,L,D)`(s): LDL decomposition for symmetric matrices as `A=L D L^T`
+
 `qr(A,Q,R)`(s): QR decomposition of matrix as `A=QR`
 
 `eig(A,V,d)`(s): eigenvalue/spectral decomposition of matrix as `A = V diag(d) V^-1`
@@ -48,7 +50,9 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 ### Linear Systems
 
-`linsol(A,b)`(f): solve (square) linear system `Ax=b`
+`**linsol(A,b)**`(f): solve (square) linear system `Ax=b`
+
+### Least Squares
 
 `lssol(A,r)`(f): solve least squares problem `Ax \approx b`
 

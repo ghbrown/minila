@@ -27,31 +27,33 @@ contains
     !      which satisfies A = L(pT,:) U ***
     implicit none
     real, intent(in) :: A(:,:)
-    real, intent(out) :: L(size(A,1),size(A,1)), U(size(A,1),size(A,1))
-    integer, intent(out) :: P(size(A,1)) !vector used to keep track of column swaps
-    real :: S(size(A,1),size(A,1))
+    real, intent(out), allocatable :: L(:,:), U(:,:)
+    integer, intent(out), allocatable :: p(:) !vector used to keep track of column swaps
+    real, allocatable :: S(:,:)
     integer :: i, n, cur_iter, max_row_rel
 
     !THIS ERROR IS ITSELF ERRONEOUS, LU DOES EXIST FOR NONSQUARE MATRICES
     !THIS MAY BE A PAIN TO IMPLEMENT (INDICES BELOW, ETC.)
     if (.not. is_square(A,n)) then !check if A is square
-       print *, "ERROR: LU is invalid for nonsquare matrices"
-       print *, "THE ABOVE ERROR IS INCORRECT, BUT LU HAS NOT"
-       print *, "NOT YET BEEN IMPLEMENTED FOR NONSQUARE MATRICES"
-       return !LU is not valid for nonsquare matrices, exit early
+       print *, "ERROR: LU has not yet been implemented for"
+       print *, "         nonsquare matrices"
+       return !LU not implemented nonsquare matrices, exit early
     end if
+
+    allocate(L(n,n), U(n,n), p(n), S(n,n))
 
     S=A
     L=0.0
     U=0.0
-    P=(/(i,i=1,size(A,1))/)
+    p=(/(i,i=1,size(A,1))/)
 
-    !there may be a way to structure this such that it overwrites S into (L_strict + I + U, L_strict: strictly lower triangular, I: identity, U: upper triangular with nontrivial diagonal elements) which would save memory (until somebody wants L and U)
+    !rewrite using packed storage (the method described below)?
+    !there may be a way to structure this such that it overwrites S into (L_strict + U, L_strict: strictly lower triangular, U: upper triangular with nontrivial diagonal elements) which would save memory (until somebody wants L and U)
     !this could be done by overwriting the non-sub-matrix part of S (one row-column shell per iteration)
 
     do cur_iter=1,n
       max_row_rel=maxloc(abs(S(cur_iter:,cur_iter)),1)-1 !get index of row with maximum leading entry (relative to cur_iter row)
-      P((/cur_iter,cur_iter+max_row_rel/))=P((/cur_iter+max_row_rel,cur_iter/)) !perform swap of P elements in place
+      p((/cur_iter,cur_iter+max_row_rel/))=p((/cur_iter+max_row_rel,cur_iter/)) !perform swap of P elements in place
       S((/cur_iter+max_row_rel,cur_iter/),cur_iter:)=S((/cur_iter,cur_iter+max_row_rel/),cur_iter:) !perform swap of submatrix rows in place
       if ( S(cur_iter,cur_iter) == 0.0) then
          print *, "ERROR: Zero pivot, attempted to LU decompose singular matrix"
