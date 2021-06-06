@@ -34,7 +34,7 @@ subroutine test_linsol(abs_tol)
 
   if (norm2(matmul(A,x)-b) > abs_tol) then
      print *, "  FAILED,    linsol (linear system solve)"
-     print *, "    residual: ", norm2(matmul(A,x)-b)
+     print *, "    residual 2-norm: ", norm2(matmul(A,x)-b)
   else
      print *, "  PASSED,    linsol (linear system solve)"
   end if

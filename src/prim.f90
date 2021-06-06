@@ -132,6 +132,41 @@ contains
     end do
   end function set_diag
 
+  function get_triang(A,type) result(T)
+    !extracts the *-triangular part of matrix A into T
+    real, intent(in) :: A(:,:)
+    character, intent(in) :: type
+    real, allocatable :: T(:,:)
+    integer :: i, n
+
+    if (.not. is_square(A,n)) then
+       print *, "ERROR: cannot solve nonsquare linear system"
+       return
+    end if
+
+    allocate(T(n,n))
+    T=0.0
+
+    if (type == "l") then
+       do i=1,n-1
+          T(:,i+1:n)=A(:,i:n) !extract lower triangle (no diagonal)
+       end do
+    else if (type == "u") then
+       do i=2,n
+          T(:,1:i-1)=A(:,1:i-1) !extract upper triangle (no diagonal)
+       end do
+    else
+       print *, "ERROR: accepted inputs for get_triang(*,type) are:"
+       print *, "         ""u"" - upper triangular"
+       print *, "         ""l"" - upper triangular"
+    end if
+
+    
+
+  end function get_triang
+
+  
+
 
   function rop(u1,u2) result(u1u2T)
     !rank one product
@@ -225,11 +260,10 @@ contains
 
 
   function strang(T,b) result(x)
-    !solve triangular system, detects type of triangularity
+    !solves triangular linear system, detecting type of triangularity
     !convenient wrapper and safeguarder for (diag/bck/fwd)sub
     !NOTE: does an O(n^2) check for type of triangularity,
-    !      if performance is critical use the *sub functions
-    !      directly
+    !      if performance is critical use the *sub functions directly
     !---Inputs---
     !T: (upper OR lower) triangular matrix
     !b: right hand side vector
@@ -262,7 +296,6 @@ contains
     end if
 
   end function strang
-  
 
 end module prim
 

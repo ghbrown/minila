@@ -26,6 +26,8 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 **`set_diag(diag_vec)`**(f): returns square matrix of zeros with diagonal elements specified by `diag_vec`
 
+**`get_triang(A,type)`**(f): returns lower (`type="l"`) or upper (`type="u"`) triangle (NOT including the diagonal) of matrix `A` as a matrix
+
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to `u1 u2^T`
 
 **`diag_sub(D,b)`**(f): solve lower diagonal system `Dx=b` for `x=b/get_diag(D)`
@@ -50,7 +52,9 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 ### Linear Systems
 
-`**linsol(A,b)**`(f): solve (square) linear system `Ax=b`
+`**linsol(A,b)**`(f): solves (square) linear system `Ax=b` via LU decomposition
+
+`sor(A,b,rel_tol,max_iter)`(f): solves `Ax=b` via successive over-relaxation (an iterative method); terminates when relative error is less than `rel_tol` or when more than `max_iter` iterations have been performed
 
 ### Least Squares
 

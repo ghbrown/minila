@@ -30,6 +30,7 @@ subroutine test_rop(abs_tol)
   end if
 end subroutine test_rop
 
+
 subroutine test_strang(abs_tol)
   use prim
 
@@ -63,8 +64,6 @@ subroutine test_strang(abs_tol)
   end if
 
 end subroutine test_strang
-
-
 
 
 
