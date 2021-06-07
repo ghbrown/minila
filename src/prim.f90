@@ -149,11 +149,11 @@ contains
 
     if (type == "l") then
        do i=1,n-1
-          T(:,i+1:n)=A(:,i:n) !extract lower triangle (no diagonal)
+          T(i+1:n,i)=A(i+1:n,i) !extract lower triangle (no diagonal)
        end do
     else if (type == "u") then
        do i=2,n
-          T(:,1:i-1)=A(:,1:i-1) !extract upper triangle (no diagonal)
+          T(1:i-1,i)=A(1:i-1,i) !extract upper triangle (no diagonal)
        end do
     else
        print *, "ERROR: accepted inputs for get_triang(*,type) are:"
@@ -161,7 +161,6 @@ contains
        print *, "         ""l"" - upper triangular"
     end if
 
-    
 
   end function get_triang
 
