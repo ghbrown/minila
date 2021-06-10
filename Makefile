@@ -4,7 +4,7 @@ FC=gfortran #Fortran compiler
 #Source programs
 PRIM_PROGS= src/prim.f90
 DECOMP_PROGS=src/decomp.f90
-LINSYS_PROGS=src/linsys.f90
+LINSYS_PROGS=src/linsys.f90 src/linsys_linsol.f90 src/linsys_inv.f90 src/linsys_sor.f90
 ALL_PROGS=src/minila.f90
 
 #Module (.mod file location)
@@ -21,8 +21,9 @@ LINSYS_TEST=tests/test_linsys.f90
 all:
 	@$(MAKE) -s prim
 	@$(MAKE) -s decomp
-	@$(FC) $(ALL_PROGS) 
-	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -o $(EXE_DIR)/minila.x
+	@$(MAKE) -s linsys
+	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(ALL_PROGS) -o $(OBJ_DIR)/minila.o
+
 
 clean:
 	@rm -f ./*.mod ./*.o ./*.x
@@ -39,7 +40,7 @@ decomp:
 
 linsys:
 	@$(MAKE) -s decomp
-	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(LINSYS_PROGS) -o $(OBJ_DIR)/linsys.o
+	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(LINSYS_PROGS)
 
 
 #Tests

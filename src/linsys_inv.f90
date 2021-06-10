@@ -2,6 +2,7 @@
 submodule (linsys) linsys_inv
 
 contains
+
   module function inv(A) result(A_inv)
     !Computes the inverse of a square matrix
     implicit none
@@ -25,7 +26,6 @@ contains
     end do
 
     A_inv=linsol(A,id) !solve A X = I using linsol
-
   end function inv
 
 end submodule linsys_inv

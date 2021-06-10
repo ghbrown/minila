@@ -5,7 +5,7 @@ contains
 
   !for Ax=b
   !x, b vectors
-  function linsol(A,b) result(x)
+  module function linsol_vec(A,b) result(x)
     !Solves the linear system Ax=b for x.
     !---Inputs---
     !A: full rank square matrix (these are checked)
@@ -37,12 +37,12 @@ contains
     b_permuted=b(p)
     y=fwd_sub(L,b_permuted) !solve L(Ux)=b_permuted for y=Ux
     x=bck_sub(U,y) !solve Ux=y=(Ux) for x
+  end function linsol_vec
 
-  end function linsol
 
   !for AX=B
   !X, B matrices
-  function linsol(A,B) result(X)
+  module function linsol_mat(A,B) result(X)
     !Solves the linear system AX=B for X.
     !---Inputs---
     !A: full rank square matrix (these are checked)
@@ -51,7 +51,7 @@ contains
     !X: matrix solution to "matrix linear system"
     real, intent(in) :: A(:,:)
     real, intent(in) :: B(:,:)
-    real, allocatable :: X(:)
+    real, allocatable :: X(:,:)
     real, allocatable, dimension(:,:) :: L, U
     real, allocatable :: b_cur(:), b_permuted(:), y(:)
     integer, allocatable :: p(:) !row pivot vectors (such that PA=A(p,:)
@@ -62,7 +62,7 @@ contains
        return
     end if
 
-    if (size(B,1) =/= n) then
+    if (size(B,1) /= n) then
        print *, "ERROR: dimension 1 of matrix A and matrix B do not match"
        return
     end if
@@ -84,6 +84,7 @@ contains
        y=fwd_sub(L,b_permuted) !solve L(Ux)=b_permuted for y=Ux
        X(:,i)=bck_sub(U,y) !solve Ux=y=(Ux) for x
     end do
+  end function linsol_mat
 
 end submodule linsys_linsol
 

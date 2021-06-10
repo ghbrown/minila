@@ -1,48 +1,51 @@
 
 module linsys
-  !Contains routines for the solution of linear systems, and computation of inverse.
+  !routines for the solution of linear systems, and computation of inverse
   use prim
   use decomp
   implicit none
 
-contains
+  private
+  public :: linsol
+  public :: inv
+  public :: sor
 
   !DETERMINISTIC METHODS
   !LU decomposition based linear solver
-  interface
+  interface linsol
      !for vector unknown x
-     function linsol(A,b) result(x)
+     module function linsol_vec(A,b) result(x)
         real, intent(in) :: A(:,:)
         real, intent(in) :: b(size(A,2))
         real, allocatable :: x(:)
-     end function linsol
+     end function linsol_vec
 
      !for matrix unknown X
-     function linsol(A,B) result(X)
+     module function linsol_mat(A,B) result(X)
         real, intent(in) :: A(:,:)
         real, intent(in) :: B(:,:)
         real, allocatable :: X(:,:)
-     end function linsol
-  end interface
+      end function linsol_mat
+  end interface linsol
 
   !inverse
-  interface
-     function inv(A) result(A_inv)
+  interface inv
+     module function inv(A) result(A_inv)
        real, intent(in) :: A(:,:)
        real, allocatable :: A_inv(:,:)
      end function inv
-  end interface
+  end interface inv
 
 
   !ITERATIVE METHODS
   !successive over-relaxation
-  interface
-     function sor(A,b,rel_tol,max_iter) result(x)
+  interface sor
+     module function sor(A,b,rel_tol,max_iter) result(x)
         real, intent(in) :: A(:,:), rel_tol
         real, intent(in) :: b(:)
         integer, intent(in) :: max_iter
         real, allocatable :: x(:)
      end function sor
-  end interface
+  end interface sor
    
 end module linsys
