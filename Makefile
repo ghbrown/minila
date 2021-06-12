@@ -35,11 +35,11 @@ prim:
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(PRIM_PROGS) -o $(OBJ_DIR)/prim.o
 
 decomp:
-	$(MAKE) prim
+	@$(MAKE) -s prim
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(DECOMP_PROGS) -o $(OBJ_DIR)/decomp.o
 
 linsys:
-	$(MAKE) decomp
+	@$(MAKE) -s decomp
 	@$(FC) -I $(MOD_DIR) -J $(MOD_DIR) -c $(LINSYS_PROGS)
 	@mv *.o $(OBJ_DIR)/ #move object files into proper directory, this solution is a total hack, and should be fixed when the make process is overhauled
 

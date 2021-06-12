@@ -1,6 +1,8 @@
 
 submodule (linsys) linsys_linsol
 
+  implicit none
+
 contains
 
   !for Ax=b
@@ -17,7 +19,7 @@ contains
     real, allocatable :: x(:)
     real, allocatable, dimension(:,:) :: L, U
     real, allocatable :: b_permuted(:), y(:)
-    integer, allocatable :: p(:) !row pivot vectors (such that PA=A(p,:)
+    integer, allocatable :: p(:) !row pivot vector (such that PA=A(p,:))
     integer :: i, n
 
     if (.not. is_square(A,n)) then
@@ -87,5 +89,3 @@ contains
   end function linsol_mat
 
 end submodule linsys_linsol
-
-

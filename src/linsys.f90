@@ -41,8 +41,7 @@ module linsys
   !successive over-relaxation
   interface sor
      module function sor(A,b,rel_tol,max_iter) result(x)
-        real, intent(in) :: A(:,:), rel_tol
-        real, intent(in) :: b(:)
+        real, intent(in) :: A(:,:), b(:), rel_tol
         integer, intent(in) :: max_iter
         real, allocatable :: x(:)
      end function sor

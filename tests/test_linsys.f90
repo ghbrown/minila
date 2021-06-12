@@ -12,6 +12,7 @@ contains
     real :: abs_err
     integer :: n=3
   
+
     !allocate and fill appropriately sized arrays
     allocate(A(n,n), b(n), x(n))
     call random_number(A)
@@ -64,8 +65,8 @@ end module linsys_tests
 
 
 
-program test_linsys
-  include run_linsys_tests
+program run_linsys_tests
+  use linsys_tests
   implicit none
 
   !Tests all routines in linsys.f90
@@ -78,4 +79,6 @@ program test_linsys
   call test_linsol(abs_tol)
   call test_sor(abs_tol,sor_tol,max_iter)
   print *
-end program test_linsys
+end program run_linsys_tests
+
+
