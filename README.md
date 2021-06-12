@@ -26,7 +26,7 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 **`set_diag(diag_vec)`**(f): returns square matrix of zeros with diagonal elements specified by `diag_vec`
 
-**`get_triang(A,type)`**(f): returns lower (`type="l"`) or upper (`type="u"`) triangle (NOT including the diagonal) of matrix `A` as a matrix
+**`identity(n)`**(f): returns the identity matrix of dimension `n`
 
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to `u1 u2^T`
 
@@ -54,7 +54,10 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 `**linsol(A,b)**`(f): solves (square) linear system `Ax=b` via LU decomposition
 
+`**inverse(A)**`(f): computes the matrix inverse of `A`
+
 `sor(A,b,rel_tol,max_iter)`(f): solves `Ax=b` via successive over-relaxation (an iterative method); terminates when relative error is less than `rel_tol` or when more than `max_iter` iterations have been performed
+
 
 ### Least Squares
 
@@ -69,6 +72,8 @@ Used internally by other functions, but not the meat and potatoes of a linear al
 **`is_square(A,n)`**(f): returns logical value on whether matrix A is square, if so sets `n` equal to dim(A)
 
 **`is_triangular(A,type)`**(f): outputs a logical value, and assigns `type` to character corresponding to type of triangularity (`"q"`-not square, `"n"`-not triangular, `"u"`-upper triangular, `"l"`-lower triangular, `"d"`-diagonal)
+
+**`get_triang(A,type)`**(f): returns lower (`type="l"`) or upper (`type="u"`) triangle (NOT including the diagonal) of matrix `A` as a matrix
 
 ---
 
