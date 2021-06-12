@@ -93,6 +93,25 @@ contains
 
   end function is_triangular
 
+  function identity(n) result(id)
+    !creates the identity matrix of dimension n
+    !---Inputs---
+    !n: dimension of desired identity matrix
+    !---Outputs---
+    !id: identity matrix of size n
+    integer, intent(in) :: n
+    real,allocatable :: id(:,:)
+    integer :: j
+
+    allocate(id(n,n))
+    id=0.0
+
+    do concurrent (j=1:n)
+       id(j,j)=1.0
+    end do
+    
+  end function identity
+  
 
   function get_diag(A) result(diag_vec)
     !Returns diagonal of a square matrix.

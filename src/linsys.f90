@@ -7,7 +7,7 @@ module linsys
 
   private
   public :: linsol
-  public :: inv
+  public :: inverse
   public :: sor
 
   !DETERMINISTIC METHODS
@@ -29,12 +29,12 @@ module linsys
   end interface linsol
 
   !inverse
-  interface inv
-     module function inv(A) result(A_inv)
+  interface inverse
+     module function inverse(A) result(A_inv)
        real, intent(in) :: A(:,:)
        real, allocatable :: A_inv(:,:)
-     end function inv
-  end interface inv
+     end function inverse
+  end interface inverse
 
 
   !ITERATIVE METHODS

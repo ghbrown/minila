@@ -1,13 +1,13 @@
 
-submodule (linsys) linsys_inv
+submodule (linsys) linsys_inverse
 
 contains
 
-  module function inv(A) result(A_inv)
+  module function inverse(A) result(A_inv)
     !Computes the inverse of a square matrix
     implicit none
     real, intent(in) :: A(:,:)
-    real, allocatable :: A_inv(:,:), id(:,:)
+    real, allocatable :: A_inv(:,:), Id(:,:)
     integer :: j, n
 
     if (.not. is_square(A,n)) then
@@ -16,19 +16,14 @@ contains
        return
     end if
 
-    allocate(A_inv(n,n),id(n,n))
+    allocate(A_inv(n,n),Id(n,n))
 
-    !set identity matrix
-    !move this to prim
-    id=0.0
-    do concurrent (j=1:n)
-       id(j,j)=1.0
-    end do
+    Id=identity(n) !make identity matrix of dimension n
 
-    A_inv=linsol(A,id) !solve A X = I using linsol
-  end function inv
+    A_inv=linsol(A,Id) !solve A X = Id using linsol, giving X = A^(-1)
+  end function inverse
 
-end submodule linsys_inv
+end submodule linsys_inverse
 
 
 

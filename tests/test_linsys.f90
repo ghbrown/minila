@@ -61,6 +61,30 @@ contains
   
   end subroutine test_sor
 
+
+  subroutine test_inverse(abs_tol)
+    !tests matrix inversion function
+    real, intent(in) :: abs_tol
+    real, allocatable :: A(:,:), A_inv(:,:), Id(:,:)
+    real :: mean_elem_err
+    integer :: n=3
+
+    allocate(A(n,n), A_inv(n,n), Id(n,n))
+    call random_number(A)
+
+    A_inv=inverse(A)
+    Id=identity(n)
+
+    mean_elem_err=sum(abs(matmul(A_inv,A)-id))/size(A)
+    if (mean_elem_err > abs_tol) then
+       print *, "  FAILED,    inverse (matrix inversion)"
+       print *, "    mean elementwise error: ", mean_elem_err
+    else
+       print *, "  PASSED,    inverse (matrix inversion)"
+    end if
+
+  end subroutine test_inverse
+
 end module linsys_tests
 
 
@@ -77,6 +101,7 @@ program run_linsys_tests
   print *
   print *, "---LINSYS TESTS---"
   call test_linsol(abs_tol)
+  call test_inverse(abs_tol)
   call test_sor(abs_tol,sor_tol,max_iter)
   print *
 end program run_linsys_tests
