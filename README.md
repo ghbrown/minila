@@ -18,7 +18,7 @@ A standalone Fortran implementation of common linear algebraic operations for de
 
 ### Primitives
 
-Simple linear algebra operations not included in Fortran built-ins. Building blocks for other modules.
+Simple linear algebra operations not included as Fortran intrinsics. Building blocks for other modules.
 
 **`disp_mat(A)`**(s): displays matrix `A`
 
@@ -52,11 +52,11 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 ### Linear Systems
 
-`**linsol(A,b)**`(f): solves (square) linear system `Ax=b` via LU decomposition
+**`linsol(A,b)`**(f): solves (square) linear system `Ax=b` via LU decomposition
 
-`**inverse(A)**`(f): computes the matrix inverse of `A`
+**`inverse(A)`**(f): computes the matrix inverse of `A`
 
-`sor(A,b,rel_tol,max_iter)`(f): solves `Ax=b` via successive over-relaxation (an iterative method); terminates when relative error is less than `rel_tol` or when more than `max_iter` iterations have been performed
+**`sor(A,b,rel_tol,max_iter)`**(f): solves `Ax=b` via successive over-relaxation (an iterative method); terminates when relative error is less than `rel_tol` or when more than `max_iter` iterations have been performed
 
 
 ### Least Squares
@@ -65,9 +65,10 @@ Simple linear algebra operations not included in Fortran built-ins. Building blo
 
 ---
 
-### Helper Functions
+## Helper Functions
 
 Used internally by other functions, but not the meat and potatoes of a linear algebra library.
+All included in `prim.f90` module currently.
 
 **`is_square(A,n)`**(f): returns logical value on whether matrix A is square, if so sets `n` equal to dim(A)
 
