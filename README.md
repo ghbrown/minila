@@ -49,10 +49,12 @@ Simple linear algebra operations not included as Fortran intrinsics. Building bl
 
 `eig(A,V,d)`(s): eigenvalue/spectral decomposition of matrix as `A = V diag(d) V^-1`
 
+`svd(A,U,d,V)`(s): singular value decomposition of a matrix as `A = U diag(d) V^T`
+
 
 ### Linear Systems
 
-**`linsol(A,b)`**(f): solves (square) linear system `Ax=b` via LU decomposition
+**`linsol(A,B)`**(f): solves (square) linear system `AX=B` via LU decomposition, the solution `X` will be of the same shape as the right hand side `B`, which can be a vector (single linear system) or a matrix (set of linear systems)
 
 **`inverse(A)`**(f): computes the matrix inverse of `A`
 
