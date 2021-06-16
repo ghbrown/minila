@@ -30,7 +30,7 @@ Simple linear algebra operations not included as Fortran intrinsics. Building bl
 
 **`rop(u1,u2)`**(f): rank one product of two vectors, produces matrix equal to `u1 u2^T`
 
-**`diag_sub(D,b)`**(f): solve lower diagonal system `Dx=b` for `x=b/get_diag(D)`
+**`diag_sub(D,b)`**(f): solve diagonal system `Dx=b` for `x=b/get_diag(D)`
 
 **`bck_sub(T,b)`**(f): solve lower triangular system `Tx=b` for `x` using back substitution
 
@@ -43,7 +43,7 @@ Simple linear algebra operations not included as Fortran intrinsics. Building bl
 
 **`lupp(A,L,U,p)`**(s): LU decomposition of square matrix with partial pivoting, results satisfy `PA=A(p,:)=LU` where `P` is the matrix corresponding to pivot vector `p` 
 
-`ldl(A,L,D)`(s): LDL decomposition for symmetric matrices as `A=L D L^T`
+`ldl(A,L,D)`(s): LDL decomposition for symmetric matrix as `A=L D L^T`
 
 `qr(A,Q,R)`(s): QR decomposition of matrix as `A=QR`
 
@@ -54,11 +54,11 @@ Simple linear algebra operations not included as Fortran intrinsics. Building bl
 
 ### Linear Systems
 
-**`linsol(A,B)`**(f): solves (square) linear system `AX=B` via LU decomposition, the solution `X` will be of the same shape as the right hand side `B`, which can be a vector (single linear system) or a matrix (set of linear systems)
+**`linsol(A,B)`**(f): solves linear system `AX=B` via LU decomposition, the solution `X` will be of the same shape as the right hand side `B`, which can be a vector (single linear system) or a matrix (set of linear systems)
 
 **`inverse(A)`**(f): computes the matrix inverse of `A`
 
-**`sor(A,b,rel_tol,max_iter)`**(f): solves `Ax=b` via successive over-relaxation (an iterative method); terminates when relative error is less than `rel_tol` or when more than `max_iter` iterations have been performed
+**`sor(A,b,rel_tol,max_iter)`**(f): solves `Ax=b` via successive over-relaxation (an iterative method); terminates when relative error is less than `rel_tol` or when `max_iter` iterations have been performed
 
 
 ### Least Squares
